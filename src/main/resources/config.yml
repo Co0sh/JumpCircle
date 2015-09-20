@@ -1,0 +1,22 @@
+world: world
+height: 66
+radius: 2
+max_time: 10
+food_level: 12
+next_lap: '&bLap &e%lap%&b!'
+stats: '&2=== &aGreat Jumping Stats &2==='
+totals: '&bYou have completed &e%laps%&b full laps. Your longest streak is &e%streak%&b laps in a row. You have been jumping for &e%time%s&b minutes total. Your fastest lap was &e%fastest%&b seconds.'
+ranking_lines: '&e%place%. &b%player%&f: &e%number%'
+max_laps: '&aLongest streak:'
+min_time: '&aFastest lap:'
+total_laps: '&aGreatest total amount of laps:'
+total_time: '&aLongest total time of jumping:'
+command_info: '&aYou can use &e/%cmd%&b command for jump ranking and stats.'
+command: jump
+command_laps: 3
+ranking_top: 3
+locs:
+- 100.5;70;-100.5
+- 102.5;70;-102.5
+- 104.5;70;-104.5
+players: []
