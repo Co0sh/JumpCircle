@@ -143,6 +143,7 @@ public class JumpCircle extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		if (e.getPlayer().isFlying()) return;
+		if (e.getPlayer().isInsideVehicle()) return;
 		Location loc = e.getTo();
 		// check the player is inside the cuboid
 		if (loc.getX() > minX && loc.getX() < maxX &&
@@ -229,9 +230,11 @@ public class JumpCircle extends JavaPlugin implements Listener {
 				String number = null;
 				if (ranking.equals("min_time")) number = String.format("%.2f",
 						((double) numbers[i]) / 1000) + "s";
-				else if (ranking.equals("max_laps") || ranking.equals(
-						"total_laps")) number = String.valueOf(numbers[i]);
-				else number = String.valueOf(numbers[i] / 60000) + "m";
+				else if (ranking.equals("max_laps")) {
+					number = String.valueOf(numbers[i]);
+				} else if (ranking.equals("total_laps")) {
+					number = String.valueOf(numbers[i] / locs.size());
+				} else number = String.valueOf(numbers[i] / 60000) + "m";
 				player.sendMessage(getConfig().getString("ranking_lines")
 						.replace('&', '§')
 						.replace("%place%", String.valueOf(i+1))
@@ -310,7 +313,7 @@ public class JumpCircle extends JavaPlugin implements Listener {
 		 * @return total amount of full laps
 		 */
 		public int getTotalLaps() {
-			return totalLaps;
+			return totalLaps / locs.size();
 		}
 
 		/**
@@ -370,6 +373,7 @@ public class JumpCircle extends JavaPlugin implements Listener {
 			}
 			// everything alright, continue
 			totalTime += now - timeOfLast;
+			totalLaps++;
 			lastLoc = loc;
 			timeOfLast = now;
 			// if it's the first loc again, we have a lap
@@ -379,7 +383,6 @@ public class JumpCircle extends JavaPlugin implements Listener {
 					player.setFoodLevel(foodLevel);
 				}
 				curLaps++;
-				totalLaps++;
 				long curTime = now - timeStarted;
 				player.sendMessage(getConfig().getString("next_lap")
 						.replace('&', '§')

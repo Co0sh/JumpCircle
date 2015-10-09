@@ -3,4 +3,4 @@ main: pl.betoncraft.jumpcircle.JumpCircle
 description: Lets you count your jumping in circles.
 authors: [Co0sh]
 softdepend: [BetonQuest]
-version: 1.0
+version: 1.1
